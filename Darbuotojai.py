@@ -3,19 +3,19 @@ import PySimpleGUI as sg
 from config import Projektas, session
 
 
-def show_employees():
+def show_employees_info():
     # Get all employees from the database
     employees = session.query(Projektas).all()
     
     # Initialize a string to store employee information
     employee_info = ""
 
-    # Loop through each employee and append their information to the employee_info string
-    for employee in employees:
-        employee_info += f"\nId: {employee.id} \nName: {employee.name}\nLast Name: {employee.last_name}\nBirth Date: {employee.birth_date}\nPosition: {employee.position}\nSalary: {employee.salary}$\n"
+    # Loop through each employee and append their information to the employee_info string (Used list comprehension to simplify the code Instead of using a for loop to iterate through each employee)
+    employee_info = "\n".join([f"\nID: {employee.id} \nName: {employee.name}\nLast Name: {employee.last_name}\nBirth Date: {employee.birth_date}\nPosition: {employee.position}\nSalary: {employee.salary}$\n" for employee in employees])
+
 
     # Display a popup message with the number of retrieved employees and their information
-    sg.popup(f"Retrieved {len(employees)} employees from the database:{employee_info}")
+    sg.popup(f"Workers information\nRetrieved {len(employees)} employees from the database:{employee_info}")
 
 
 def add_employee(values):

@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from Projektas_su_SQLAlchemy import show_employees, add_employee, atnaujinti_elementa, delete_employee
+from Darbuotojai import show_employees_info, add_employee, atnaujinti_elementa, delete_employee
 
 sg.theme('DarkBrown7')  # Change the color scheme of the GUI
 
@@ -38,7 +38,7 @@ while True:
         break
 
     elif event == 'show':
-        show_employees()
+        show_employees_info()
 
     elif event == 'add':
         add_employee(values)

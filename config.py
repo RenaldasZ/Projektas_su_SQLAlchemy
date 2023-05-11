@@ -6,12 +6,12 @@ from datetime import datetime
 class Base(DeclarativeBase):
     pass
 
-engine = create_engine('sqlite:///projektai.db')
+engine = create_engine('sqlite:///workers.db')
 Session = sessionmaker(bind=engine)
 session = Session()
 
 class Projektas(Base):
-    __tablename__ = "projektas"
+    __tablename__ = "workers"
     id = mapped_column(Integer, primary_key=True)
     name = mapped_column(String(50), nullable=False)
     last_name = mapped_column(String(50), nullable=False)
