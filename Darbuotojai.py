@@ -4,6 +4,16 @@ from config import Projektas, session
 
 
 def show_employees_info():
+    """
+    Displays a popup message with information about all employees retrieved from the database.
+
+    Parameters:
+    None
+
+    Returns:
+    None
+    """
+
     # Get all employees from the database
     employees = session.query(Projektas).all()
     

@@ -47,7 +47,7 @@ while True:
         text = [values['name'], values['last_name'], values['birth_date'], values['position'], float(values['salary'])]
         atnaujinti_elementa(values["change_id"], text)
 
-    elif event == 'istrinti':
+    elif event == 'delete':
         delete_employee(values)
         
 if __name__ == "__main__":
