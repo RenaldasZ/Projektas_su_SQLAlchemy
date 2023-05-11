@@ -13,7 +13,6 @@ def show_employees_info():
     Returns:
     None
     """
-
     # Get all employees from the database
     employees = session.query(Projektas).all()
     
@@ -22,7 +21,6 @@ def show_employees_info():
 
     # Loop through each employee and append their information to the employee_info string (Used list comprehension to simplify the code Instead of using a for loop to iterate through each employee)
     employee_info = "\n".join([f"\nID: {employee.id} \nName: {employee.name}\nLast Name: {employee.last_name}\nBirth Date: {employee.birth_date}\nPosition: {employee.position}\nSalary: {employee.salary}$\n" for employee in employees])
-
 
     # Display a popup message with the number of retrieved employees and their information
     sg.popup(f"Workers information\nRetrieved {len(employees)} employees from the database:{employee_info}")
@@ -49,8 +47,7 @@ def delete_employee(values):
     else:
         sg.popup(f'Nepavyko rasti darbuotojo su ID {employee_id}.')
 
-def atnaujinti_elementa(el_id, list):
-        # session = Session(bind=engine)
+def edit_employee(el_id, list):
         darbuotojas = session.query(Projektas).filter(Projektas.id.like(f"{el_id}")).one()
         darbuotojas.name = list[0]
         darbuotojas.last_name = list[1]

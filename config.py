@@ -30,3 +30,5 @@ class Projektas(Base):
         return f"({self.id}, {self.name}, {self.last_name}, {self.birth_date}, {self.position}, {self.salary}, {self.work_since})"
 
 Base.metadata.create_all(engine)
+
+session.close()
