@@ -27,15 +27,48 @@ def show_employees_info():
 
 
 def add_employee(values):
-    name = values['name']
-    last_name = values['last_name']
-    birth_date = values['birth_date']
-    position = values['position']
-    salary = values['salary']
-    darbuotojas = Projektas(name=name, last_name=last_name, birth_date=birth_date, position=position, salary=salary)
-    session.add(darbuotojas)
-    session.commit()
-    sg.popup(f"{name} {last_name} buvo pridėtas prie duomenų bazės.")
+    try:
+        name = values['name']
+        last_name = values['last_name']
+        birth_date = values['birth_date']
+        position = values['position']
+        salary = values['salary']
+    except KeyError as e:
+        sg.popup(f"Error: the key {e} is missing from the values provided.")
+        return
+    try:
+        employee = Projektas(name=name, last_name=last_name, birth_date=birth_date, position=position, salary=salary)
+        session.add(employee)
+        session.commit()
+        sg.popup(f"{name} {last_name} has been added to the database.")
+    except Exception as e:
+        sg.popup(f"Error: failed to add employee. {e}")
+
+
+# from typing import Dict
+
+# def add_employee(name: str, last_name: str, birth_date: str, position: str, salary: float) -> str:
+#     try:
+#         with session.begin():
+#             darbuotojas = Projektas(name=name, last_name=last_name, birth_date=birth_date, position=position, salary=salary)
+#             session.add(darbuotojas)
+#         return f"{name} {last_name} buvo pridėtas prie duomenų bazės."
+#     except Exception as e:
+#         return f"Pridėjimo klaida: {str(e)}"
+
+# # Example usage:
+# values: Dict[str, str] = {
+#     'name': 'John',
+#     'last_name': 'Doe',
+#     'birth_date': '1990-01-01',
+#     'position': 'Developer',
+#     'salary': 50000
+# }
+# result = add_employee(**values)
+# print(result)  # Prints "John Doe buvo pridėtas prie duomenų bazės."
+
+
+
 
 def delete_employee(values):
     employee_id = int(values['delete_id'])
