@@ -1,6 +1,8 @@
 from datetime import datetime
 import PySimpleGUI as sg
 from config import Projektas, session
+from sqlalchemy.orm.exc import NoResultFound
+from datetime import datetime
 
 
 def show_employees_info():
@@ -54,12 +56,23 @@ def delete_employee(values):
     else:
         sg.popup(f'Nepavyko rasti darbuotojo su ID {employee_id}.')
 
-def edit_employee(el_id, list):
+
+def edit_employee(el_id, emp_list):
+    try:
         darbuotojas = session.query(Projektas).filter(Projektas.id.like(f"{el_id}")).one()
-        darbuotojas.name = list[0]
-        darbuotojas.last_name = list[1]
-        darbuotojas.birth_date = datetime.strptime(list[2], '%Y-%m-%d').date()
-        darbuotojas.position = list[3]
-        darbuotojas.salary = list[4]
+        darbuotojas.name = emp_list[0]
+        darbuotojas.last_name = emp_list[1]
+        darbuotojas.birth_date = datetime.strptime(emp_list[2], '%Y-%m-%d').date()
+        darbuotojas.position = emp_list[3]
+        darbuotojas.salary = emp_list[4]
         session.commit()
         print(darbuotojas)
+    except NoResultFound:
+        sg.popup(f"Error: Employee with ID {el_id} not found.")
+    except (IndexError, ValueError):
+        sg.popup("Error: Invalid input format.")
+    except Exception as e:
+        sg.popup(f"Error: {str(e)}")
+        session.rollback()
+
+
