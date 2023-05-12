@@ -6,7 +6,7 @@ from datetime import datetime
 class Base(DeclarativeBase):
     pass
 
-engine = create_engine('sqlite:///workers.db')
+engine = create_engine('sqlite:///workers.db', echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 
