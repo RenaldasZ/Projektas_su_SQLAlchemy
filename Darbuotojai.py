@@ -5,6 +5,23 @@ from sqlalchemy.orm.exc import NoResultFound
 from datetime import datetime
 
 
+
+def get_employees_info():
+    """
+    Retrieves information about all employees from the database.
+
+    Parameters:
+    None
+
+    Returns:
+    List of employees
+    """
+    # Get all employees from the database
+    employees = session.query(Projektas).all()
+    
+    return employees
+
+
 def show_employees_info():
     """
     Displays a popup message with information about all employees retrieved from the database.
@@ -67,7 +84,8 @@ def edit_employee(el_id, emp_list):
         darbuotojas.position = emp_list[3]
         darbuotojas.salary = emp_list[4]
         session.commit()
-        print(darbuotojas)
+        sg.popup(f'Employee with ID {el_id} has been Edited in the database.')
+        # sg.popup(darbuotojas)
     except NoResultFound:
         sg.popup(f"Error: Employee with ID {el_id} not found.")
     except (IndexError, ValueError):

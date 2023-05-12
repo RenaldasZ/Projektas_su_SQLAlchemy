@@ -13,11 +13,11 @@ session = Session()
 class Projektas(Base):
     __tablename__ = "workers"
     id = mapped_column(Integer, primary_key=True)
-    name = mapped_column(String(50), nullable=False)
-    last_name = mapped_column(String(50), nullable=False)
-    birth_date = mapped_column(Date, nullable=False)
-    position = mapped_column(String(50), nullable=False)
-    salary = mapped_column(Float(2), nullable=False)
+    name = mapped_column(String(50), nullable=True)
+    last_name = mapped_column(String(50), nullable=True)
+    birth_date = mapped_column(Date, nullable=True)
+    position = mapped_column(String(50), nullable=True)
+    salary = mapped_column(Float(2), nullable=True)
     work_since = mapped_column(DateTime, default=datetime.utcnow)
 
     def __init__(self, **kw: Any):
