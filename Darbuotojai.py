@@ -52,9 +52,10 @@ def delete_employee(values):
     if employee:
         session.delete(employee)
         session.commit()
-        sg.popup(f'Darbuotojas su ID {employee_id} buvo ištrintas iš duomenų bazės.')
+        sg.popup(f'Employee with ID {employee_id} has been deleted from the database.')
     else:
-        sg.popup(f'Nepavyko rasti darbuotojo su ID {employee_id}.')
+        sg.popup(f'Failed to find an employee with ID {employee_id}.')
+
 
 
 def edit_employee(el_id, emp_list):
